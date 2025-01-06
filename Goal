@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Goal Tracker</h1>
+    <form id="goalForm">
+        <input type="text" id="goalName" placeholder="Goal Name" required>
+        <input type="date" id="goalDeadline" required>
+        <input type="number" id="goalProgress" placeholder="Progress (%)" min="0" max="100" required>
+        <button type="submit">Add Goal</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Goal Name</th>
+                <th>Deadline</th>
+                <th>Progress</th>
+            </tr>
+        </thead>
+        <tbody id="goalTable">
+            <!-- Goals will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('goalForm');
+        const table = document.getElementById('goalTable');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('goalName').value;
+            const deadline = document.getElementById('goalDeadline').value;
+            const progress = document.getElementById('goalProgress').value;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${name}</td>
+                <td>${deadline}</td>
+                <td>${progress}%</td>
+            `;
+            table.appendChild(row);
+
+            form.reset();
+        });
+    </script>
+</body>
+</html>
